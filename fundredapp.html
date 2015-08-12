@@ -1,0 +1,236 @@
+<head>
+  <title>fundredapp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  {{> navigation}}
+</body>
+
+<template name= "Home">
+<div class = "container-fluid">
+	<div class ="row">
+		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
+		<div class ="col-lg-6 col-md-6 col-sm-10">
+			<img id="animation" src="animation.gif"/>
+		</div>
+		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
+	</div>
+
+	<div class ="row">
+		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
+		<div class ="col-lg-6 col-md-6 col-sm-10 description">
+			<h3> WELCOME TO FUNDREDAPP</h3>
+			<p>Draw your unique Fundred Dollar Bill, submit it to the Online Fundred Gallery and be part of the solution to prevent lead poisoning in cities all across America. This nationwide drawing project will honor the value of your action. Make a Fundred! Make a Difference! </p>
+			<p>FundredApp is designed and developed by Nil Tuzcu and Ryan-Alexander Thomas.</p>
+		</div>
+
+		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
+	</div>
+
+
+
+
+
+</div>
+</template>
+
+<template name="Map">
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class = "col-lg-12" id="map"> </div>
+
+		</div>
+	</div>
+</template>
+
+<template name="Gallery">
+	<div class = "container-fluid">
+		<div class ="row">
+			{{#each fundreds}}
+				{{> GalleryItem}}
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="GalleryOpen">
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class = "col-lg-12 col-md-12 col-sm-12 GalleryOpen">
+				<h1>{{fundredname}}</h1>
+				<p style="font-style:italic">by {{name}}</p>
+				<img style="width:80%" src="{{image.url}}"/>
+				<h3>Write a comment</h3>
+			</div>
+		</div>
+
+	</div>
+
+</template>
+
+
+
+<template name="GalleryItem">
+	<div class = "col-lg-4 col-md-4 col-sm-6 col-xs-12 gallerymodule" style="
+	overflow:hidden;" id="gallery">
+		<div class="dummy" style="margin-top:90%"> </div>
+			<div class="container">
+				<div class="content">
+				<h2>{{fundredname}}</h2>
+				<a href="/gallery/{{_id}}"> <img class ="galleryImage" src= "{{image.url}}"/> </a>
+				<p style="font-style:italic"> By {{name}}</p>
+				<small style="width:100%;display:block"> {{uploadedAt}}</small>
+				<div class="content-bottom">
+				<a id="likebutton" class="btn"> <span class="glyphicon glyphicon-heart">{{like}}</span> </a>
+				<img style="width:20px" src="facebook.png">
+				<img style="width:20px" src="twitter.png">
+			</div>
+			</div>
+			</div>
+	</div>
+</template>
+
+
+<template name="Submission">
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class ="col-lg-4 col-md-4 col-sm-12">
+		   <h3 style="color:#05d393"> Submit Your Fundred </h3>
+
+			<div class="form-group">
+				<label for="Name">Your Name</label>
+				<input class="form-control" id="Name" type="text" placeholder="enter your name">
+			</div>
+
+
+			<div class="form-group">
+				<label for="FundredName">Fundred's Name</label>
+				<input class="form-control" id="FundredName" type="text" placeholder="enter fundred's name">
+			</div>
+
+			<div class="form-group">
+				<label for="FundredEmail">E-mail Address</label>
+				<input class="form-control" id="FundredName" type="text" placeholder="enter your e-mail">
+			</div>
+
+			<div class="form-group">
+				<label for="DateOfBirth">Date of Birth</label>
+				<input class="form-control" id="FundredName" type="text" placeholder="mm/dd/yy">
+			</div>
+
+			<div class="form-group">
+				<label for="Zipcode">Your Zipcode</label>
+				<input class="form-control" id="FundredName" type="text" placeholder="your current zipcode">
+			</div>
+
+			<div class="form-group">
+    		<p> *I agree to use my current location <input type="checkbox"/> </p>
+			</div>
+
+			<div class="form-group">
+				<label for="Lat">Latitude:</label>
+				<input id="Lat" type="text" value="{{lat}}" >
+			</div>
+
+			<div class="form-group">
+				<label for="Lng">Longitude:</label>
+				<input id="Lng" type="text" value="{{lng}}" >
+			</div>
+
+			<div class="form-group">
+				<button class="btn btn-default" id="submit-button"> Submit </button>
+			</div>
+
+
+
+			</div>
+
+		<div class ="col-lg-4 col-md-4 col-sm-12">
+			<img style="width:100%" src="{{image.url}}"/>
+		</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="notusedForNil">
+Bu asagidaki Dropzone icin.
+		<div class ="col-lg-4 col-md-4 col-sm-12">
+			<form action="/file-upload" class = "dropzone" id="mydropzone"> </form>
+
+		</div>
+
+</template>
+<template name="Drawing">
+	<div class = "container-fluid" style="height:90%;">
+		<div class ="row" style="height:80%; background:#EEE;">
+			<div class="col-lg-4 col-sm-12 col-md-3">
+				<div class="form-group" style="float:right;">
+					<label for="color">Select Color</label>
+					<input type='text' id="color" style="float:right; margin:1em;" />
+				</div>
+			</div>
+			<div class ="col-lg-4 col-md-6 col-sm-12" >
+				<canvas  class='img- responsive' data-girar="0" width="300" height="280"></canvas>
+			</div>
+			<div class="col-lg-4 col-sm-12 col-md-3"></div>
+		</div>
+		<div class ="row">
+			<div class="col-lg-4 col-sm-12 col-md-3"></div>
+			<div class ="col-lg-4 col-md-6 col-sm-12">
+				<div class="form-group">
+				<button class="btn btn-lg btn-primary" style="float:right; margin-top:10px;" id="submit-drawing"> Continue ></button>
+			</div>
+			</div>
+			<div class="col-lg-4 col-sm-12 col-md-3"></div>
+		</div>
+	</div>
+
+</template>
+
+
+
+
+<template name= "navigation">
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav mainmenu">
+        <li><a href="/"><span class="glyphicon glyphicon-home"> ABOUT</span></a></li>
+        <li> <a href="/gallery"><span class="glyphicon glyphicon-th-large"> GALLERY</span></a> </li>
+        <li><a href="/map"> <span class="glyphicon glyphicon-globe"> MAP</span></a></li>
+        <li><a href="/submit"> <span class="glyphicon glyphicon-plus"> SUBMIT</span></a></li>
+      </ul>
+
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+
+       	<div class="navbar-brand">
+            <span style="font-style:italic; font-weight:bold"> FUNDREDAPP </span>
+            <span> <img style="max-width:90px; margin-top:-.6em;" src="logosmall.png"/></span>
+        </div>
+        <a href="http://www.fundred.org/"> <small style="color:#05d393"> Click to Learn More About Fundred </small> </a>
+
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</template>
