@@ -28,6 +28,25 @@ Router.route('/gallery/:_fundredId', function(){
 if (Meteor.isClient) {
  Session.setDefault('selectedImageId',null);
 
+
+//GOOGLE MAPS JAVASCRIPT
+ Meteor.startup(function() {
+   GoogleMaps.load();
+ });
+
+ Template.map.helpers({
+   mapOptions: function() {
+     if (GoogleMaps.loaded()) {
+       return {
+         center: new google.maps.LatLng(-37.8136, 144.9631),
+         zoom: 8
+       };
+     }
+   }
+ });
+//END OF GOOGLE MAPS JAVASCRIPS
+
+
  Template.Map.rendered = function() {
 
         // create a map in the "map" div, set the view to a given place and zoom-divi yaz

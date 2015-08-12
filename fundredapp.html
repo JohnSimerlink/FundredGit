@@ -4,10 +4,60 @@
 </head>
 
 <body>
+
+  <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : 'your-app-id',
+            xfbml      : true,
+            version    : 'v2.4'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
   {{> navigation}}
 </body>
 
+
+
 <template name= "Home">
+
+
+  <!-- Your like button code -->
+  <div class="fb-like"
+      data-href="https://www.facebook.com/osu?fref=ts"
+      data-layout="standard"
+      data-action="like"
+      data-show-faces="true">
+  </div>
+  <!--END OF FACEBOOK LIKE BUTTON-->
+
+  <!-- Your like button code -->
+  <div class="fb-like"
+      data-href="https://www.facebook.com/osu?fref=ts"
+      data-layout="standard"
+      data-action="like"
+      data-show-faces="true">
+  </div>
+  <!--END OF FACEBOOK LIKE BUTTON-->
+
+  <!-- Your like button code -->
+  <div class="fb-like"
+      data-href="https://www.facebook.com/osu?fref=ts"
+      data-layout="standard"
+      data-action="like"
+      data-show-faces="true">
+  </div>
+  <!--END OF FACEBOOK LIKE BUTTON-->
+
+
 <div class = "container-fluid">
 	<div class ="row">
 		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
@@ -16,6 +66,17 @@
 		</div>
 		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
 	</div>
+
+  <!-- Load Facebook SDK for JavaScript -->
+   <div id="fb-root"></div>
+   <script>(function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));</script>
+
 
 	<div class ="row">
 		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
@@ -43,6 +104,16 @@
 		</div>
 	</div>
 </template>
+
+
+<!-- ADDED GOOGLE MAP HTML-->
+<template name="map">
+  <div class="map-container">
+    {{> googleMap name="map" options=mapOptions}}
+  </div>
+</template>
+<!-- END OF GOOGLE MAP HTML-->
+
 
 <template name="Gallery">
 	<div class = "container-fluid">
@@ -82,8 +153,15 @@
 				<p style="font-style:italic"> By {{name}}</p>
 				<small style="width:100%;display:block"> {{uploadedAt}}</small>
 				<div class="content-bottom">
+
+
 				<a id="likebutton" class="btn"> <span class="glyphicon glyphicon-heart">{{like}}</span> </a>
-				<img style="width:20px" src="facebook.png">
+
+<!-- Facebook share code-->
+              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count"></div>
+
+              <!--End of Facebook share code-->
+
 				<img style="width:20px" src="twitter.png">
 			</div>
 			</div>
@@ -114,10 +192,28 @@
 				<input class="form-control" id="FundredName" type="text" placeholder="enter your e-mail">
 			</div>
 
+
 			<div class="form-group">
-				<label for="DateOfBirth">Date of Birth</label>
+				<label for="DateOfBirth">Are you over the age of 13?</label>
+        <form>
+<input type="radio" name="age" value="Yes" checked>Yes
+<br>
+<input type="radio" name="age" value="No">No
+</form>
 				<input class="form-control" id="FundredName" type="text" placeholder="mm/dd/yy">
 			</div>
+
+      <div class="form-group">
+        <label for="Zipcode">Your School</label>
+        <input class="form-control" id="FundredName" type="text" placeholder="your current school">
+      </div>
+
+      <div class="form-group">
+        <label for="Zipcode">Grade</label>
+        <input class="form-control" id="FundredName" type="text" placeholder="your current grade level">
+      </div>
+
+
 
 			<div class="form-group">
 				<label for="Zipcode">Your Zipcode</label>
