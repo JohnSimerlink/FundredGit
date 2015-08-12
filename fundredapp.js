@@ -19,6 +19,7 @@ Router.route('/submitdrawing', function(){
   this.render('Submission')
 } )
 
+
 Router.route('/gallery/:_fundredId', function(){
   item=Fundreds.findOne({_id: this.params._fundredId});
   this.render('GalleryOpen',{data:item})
@@ -28,42 +29,42 @@ if (Meteor.isClient) {
  Session.setDefault('selectedImageId',null);
 
  Template.Map.rendered = function() {
-  
+
         // create a map in the "map" div, set the view to a given place and zoom-divi yaz
-      var map = L.map('map').setView([42.37, -71.127], 10); 
+      var map = L.map('map').setView([42.37, -71.127], 10);
       //L.Icon.Default.imagePath = '/packages/bevanhunt_leaflet/images';
-     
+
       // add an OpenStreetMap tile layer
 
 
        L.tileLayer.provider('Stamen.Toner').addTo(map);
 
       // add a marker in the given location, attach some popup content to it and open the popup
-    
+
     var moneyicon = L.icon({
     iconUrl: 'moneyicon.png',
 
     iconSize:     [50, 60], // size of the icon
     iconAnchor:   [40, 40], // point of the icon which will correspond to marker's location
     popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
-    });  
+    });
 
-   
+
 
       var markers=Fundreds.find();
-      
+
       markers.forEach(function(element,index,array){
         var image = FundredImages.findOne(element.imageId);
-        var popup = L.popup({className:'popup'})    
+        var popup = L.popup({className:'popup'})
                           .setContent('<h3 class="popuptext">'+element.name+ '</h3> <img src="'+image.url()+'" style="width:100px"/>');
-        
+
         L.marker(element.location, {icon: moneyicon}).addTo(map)
         .bindPopup(popup);
 
 
 
       });
-      
+
  };
 
 
@@ -100,18 +101,18 @@ Template.Drawing.rendered = function(){
     ctx.closePath();
     ctx.stroke();
    };
-   
+
    $("#color").spectrum({
     color: "#f00",
     change: function(color) {
     clr=color.toHexString(); // #ff0000
     ctx.strokeStyle = clr;
-    } 
+    }
 });
    ctx.strokeStyle = "#f00";
    ctx.scale(300/canvas.width(),300/canvas.height());
    make_base();
-   
+
    document.ontouchmove=function(event){
     event.preventDefault();
    };
@@ -191,7 +192,7 @@ Template.Drawing.events({
 
    //     }
 
-   // }); 
+   // });
 
 };
  Template.Submission.helpers({
@@ -199,13 +200,13 @@ Template.Drawing.events({
       lat: function(){
         if (Geolocation.latLng() !=null)
         return Geolocation.latLng().lat;
-        else 
+        else
         return "waiting for latitude"
       },
       lng: function(){
         if (Geolocation.latLng() !=null)
         return Geolocation.latLng().lng;
-        else 
+        else
         return "waiting for longitude"
       },
       image: function(){
@@ -230,7 +231,7 @@ Template.Drawing.events({
  Template.GalleryItem.events ({
   "click #likebutton": function(){
     var fundredtolike=Template.currentData();
-    Fundreds.update(fundredtolike._id, {$inc: {like: 1}}); 
+    Fundreds.update(fundredtolike._id, {$inc: {like: 1}});
 
   }
 
@@ -246,13 +247,13 @@ Template.GalleryItem.helpers({
   image: function(){
     return FundredImages.findOne(this.imageId);
   }
-});  
+});
 
 Template.GalleryOpen.helpers({
   image: function(){
     return FundredImages.findOne(this.imageId);
   }
-});  
+});
 
 
 }
