@@ -7,6 +7,11 @@ Router.route('/map', function(){
   this.render('Map')
 } )
 
+Router.route('/google', function(){
+  this.render('Google')
+} )
+
+
 Router.route('/gallery', function(){
   this.render('Gallery')
 } )
@@ -15,10 +20,15 @@ Router.route('/submit', function(){
   this.render('Drawing')
 } )
 
+
+
 Router.route('/submitdrawing', function(){
   this.render('Submission')
 } )
 
+Router.route('/color', function(){
+  this.render('Color')
+} )
 
 Router.route('/gallery/:_fundredId', function(){
   item=Fundreds.findOne({_id: this.params._fundredId});
@@ -30,11 +40,12 @@ if (Meteor.isClient) {
 
 
 //GOOGLE MAPS JAVASCRIPT
- Meteor.startup(function() {
-   GoogleMaps.load();
- });
 
- Template.map.helpers({
+Template.google.rendered = function (){
+
+GoogleMaps.load();
+
+ Template.google.helpers({
    mapOptions: function() {
      if (GoogleMaps.loaded()) {
        return {
@@ -43,7 +54,7 @@ if (Meteor.isClient) {
        };
      }
    }
- });
+ });};
 //END OF GOOGLE MAPS JAVASCRIPS
 
 
@@ -139,7 +150,7 @@ Template.Drawing.rendered = function(){
    function make_base()
 {
   base_image = new Image();
-  base_image.src = 'fundredtemplate.png';
+  base_image.src = 'fundredtemplate.jpg';
   base_image.onload = function(){
 
     ctx.drawImage(base_image, 0, 0,canvas.width(),canvas.width()*base_image.height/base_image.width);
@@ -280,7 +291,14 @@ Template.GalleryOpen.helpers({
 
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
+  Meteor.startup(function ()
+{
     // code to run on server at startup
+
+
+
+
+
+
   });
 }

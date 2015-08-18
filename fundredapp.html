@@ -26,36 +26,9 @@
 </body>
 
 
-
 <template name= "Home">
 
 
-  <!-- Your like button code -->
-  <div class="fb-like"
-      data-href="https://www.facebook.com/osu?fref=ts"
-      data-layout="standard"
-      data-action="like"
-      data-show-faces="true">
-  </div>
-  <!--END OF FACEBOOK LIKE BUTTON-->
-
-  <!-- Your like button code -->
-  <div class="fb-like"
-      data-href="https://www.facebook.com/osu?fref=ts"
-      data-layout="standard"
-      data-action="like"
-      data-show-faces="true">
-  </div>
-  <!--END OF FACEBOOK LIKE BUTTON-->
-
-  <!-- Your like button code -->
-  <div class="fb-like"
-      data-href="https://www.facebook.com/osu?fref=ts"
-      data-layout="standard"
-      data-action="like"
-      data-show-faces="true">
-  </div>
-  <!--END OF FACEBOOK LIKE BUTTON-->
 
 
 <div class = "container-fluid">
@@ -105,11 +78,15 @@
 	</div>
 </template>
 
+<template name="Color">
+
+</template>
+
 
 <!-- ADDED GOOGLE MAP HTML-->
-<template name="map">
+<template name="google">
   <div class="map-container">
-    {{> googleMap name="map" options=mapOptions}}
+    {{> googleMap name="google" options=mapOptions}}
   </div>
 </template>
 <!-- END OF GOOGLE MAP HTML-->
@@ -124,6 +101,8 @@
 		</div>
 	</div>
 </template>
+
+
 
 <template name="GalleryOpen">
 	<div class = "container-fluid">
@@ -259,6 +238,7 @@ Bu asagidaki Dropzone icin.
 
 </template>
 <template name="Drawing">
+
 	<div class = "container-fluid" style="height:90%;">
 		<div class ="row" style="height:80%; background:#EEE;">
 			<div class="col-lg-4 col-sm-12 col-md-3">
@@ -296,6 +276,8 @@ Bu asagidaki Dropzone icin.
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
     </div>
 
@@ -305,16 +287,23 @@ Bu asagidaki Dropzone icin.
         <li><a href="/"><span class="glyphicon glyphicon-home"> ABOUT</span></a></li>
         <li> <a href="/gallery"><span class="glyphicon glyphicon-th-large"> GALLERY</span></a> </li>
         <li><a href="/map"> <span class="glyphicon glyphicon-globe"> MAP</span></a></li>
+        <li><a href="/google"> <span class="glyphicon glyphicon-globe"> GOOGLE MAPS</span></a></li>
         <li><a href="/submit"> <span class="glyphicon glyphicon-plus"> SUBMIT</span></a></li>
+        <li><a href="/color"> <span class="glyphicon glyphicon-plus"> COLOR</span></a></li>
       </ul>
 
       <form class="navbar-form navbar-left" role="search">
+
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
+
       </form>
 
+
       <ul class="nav navbar-nav navbar-right">
+
+
 
        	<div class="navbar-brand">
             <span style="font-style:italic; font-weight:bold"> FUNDREDAPP </span>
@@ -326,5 +315,15 @@ Bu asagidaki Dropzone icin.
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+
+  <!-- Your like button code -->
+  <div class="fb-like"
+      data-href="https://www.facebook.com/pages/Fundred-Dollar-Bill-Test/397084627159806"
+      data-layout="standard"
+      data-action="like"
+      data-show-faces="true">
+  </div>
+  <!--END OF FACEBOOK LIKE BUTTON-->
+
 </nav>
 </template>
