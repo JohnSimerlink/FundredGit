@@ -20,14 +20,17 @@ Router.route('/submit', function(){
   this.render('Drawing')
 } )
 
+Router.route('/paint', function(){
+  this.render('Paint')
+} )
 
 
 Router.route('/submitdrawing', function(){
   this.render('Submission')
 } )
 
-Router.route('/color', function(){
-  this.render('Color')
+Router.route('/dropzone', function(){
+  this.render('Dropzone')
 } )
 
 Router.route('/gallery/:_fundredId', function(){
@@ -43,22 +46,53 @@ if (Meteor.isClient) {
 
 Template.google.rendered = function (){
 
+
+
+
 GoogleMaps.load();
 
- Template.google.helpers({
-   mapOptions: function() {
-     if (GoogleMaps.loaded()) {
-       return {
-         center: new google.maps.LatLng(-37.8136, 144.9631),
-         zoom: 8
-       };
-     }
-   }
- });};
-//END OF GOOGLE MAPS JAVASCRIPS
+
+
+
+Template.google.helpers({
+  mapOptions: function() {
+
+  /*  if (GoogleMaps.loaded()) {
+      return {
+        center: new google.maps.LatLng(39.9611111, -82.9988889),
+        zoom: 8
+      };
+    }*/
+
+    if (GoogleMaps.loaded()) {
+        return {
+          center: new google.maps.LatLng(39.9611111, -82.9988889),
+          zoom: 8
+        };
+      }
+
+
+
+  }
+
+
+
+
+ });
+
+
+
+
+};
+
+//END OF GOOGLE MAPS JAVASCRIPT
 
 
  Template.Map.rendered = function() {
+
+
+
+
 
         // create a map in the "map" div, set the view to a given place and zoom-divi yaz
       var map = L.map('map').setView([42.37, -71.127], 10);
@@ -96,13 +130,17 @@ GoogleMaps.load();
       });
 
  };
+//NEW PAINT
 
 
+//OLD PAINT
 Template.Drawing.rendered = function(){
+
   var canvas = $('canvas'),
        ctx = canvas[0].getContext('2d'),
        drawing = false,
        from, clr;
+
    var   parentOffset = canvas.offset();
 
 
@@ -123,7 +161,7 @@ Template.Drawing.rendered = function(){
     from = to;
 
   });
-
+//Function for drawing line
    function drawLine(ctx,from,to){
     ctx.beginPath();
     ctx.moveTo(from.x, from.y);
@@ -132,6 +170,8 @@ Template.Drawing.rendered = function(){
     ctx.stroke();
    };
 
+
+//color spectrum
    $("#color").spectrum({
     color: "#f00",
     change: function(color) {
@@ -139,23 +179,30 @@ Template.Drawing.rendered = function(){
     ctx.strokeStyle = clr;
     }
 });
+//width for draw line
    ctx.strokeStyle = "#f00";
-   ctx.scale(300/canvas.width(),300/canvas.height());
+   ctx.scale(1200/canvas.width(),1120/canvas.height());
    make_base();
 
    document.ontouchmove=function(event){
     event.preventDefault();
    };
 
-   function make_base()
+
+//END OF OLD PAINT
+
+
+//function make_base()....OLD BASE GOES HERE
+function make_base()
 {
   base_image = new Image();
-  base_image.src = 'fundredtemplate.jpg';
+  base_image.src = 'fundredtemplate.png';
   base_image.onload = function(){
 
     ctx.drawImage(base_image, 0, 0,canvas.width(),canvas.width()*base_image.height/base_image.width);
   };
 }
+
 
 };
 
@@ -185,44 +232,44 @@ Template.Drawing.events({
    // to the arrayOfImageIds object.
    var arrayOfImageIds = [];
 
-   // mydropzone = new Dropzone("#mydropzone", {
-   //    thumbnailWidth: 180,
-   //    thumbnailHeight: 180,
-   //    dictDefaultMessage: "Drag and Drop Fundreds    or click",
-   //    acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF,.pdf,.pub",
-   //    accept: function(file, done){
-   //       FundredImages.insert(file, function(err, fileObj){
-   //             if(err){
-   //               alert("Error");
-   //             } else {
-   //               // gets the ID of the image that was uploaded
-   //               var imageId = fileObj._id;
-   //               Session.set('selectedImageId',imageId);
-   //               // do something with this image ID, like save it somewhere
-   //               arrayOfImageIds.push(imageId);
+    mydropzone = new Dropzone("#mydropzone", {
+       thumbnailWidth: 180,
+      thumbnailHeight: 180,
+       dictDefaultMessage: "Drag and Drop Fundreds    or click",
+       acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF,.pdf,.pub",
+       accept: function(file, done){
+          FundredImages.insert(file, function(err, fileObj){
+                if(err){
+                  alert("Error");
+                } else {
+                  // gets the ID of the image that was uploaded
+                  var imageId = fileObj._id;
+                  Session.set('selectedImageId',imageId);
+                  // do something with this image ID, like save it somewhere
+                  arrayOfImageIds.push(imageId);
 
-   //             };
-   //         });
-   //             // Create the remove button
-   //             var removeButton = Dropzone.createElement("<button>Remove file</button>");
-   //             var _this = this;
-   //             removeButton.addEventListener("click", function(e) {
-   //               // Make sure the button click doesn't submit the form:
-   //              e.preventDefault();
-   //              e.stopPropagation();
-   //               // Remove the file preview. And delete it from TempImage.
-   //              _this.removeFile(file);
-   //              console.log(_this);
-   //              //TempImage.remove({"_id":Session.get('selectedImageId')});
+                };
+            });
+                // Create the remove button
+                var removeButton = Dropzone.createElement("<button>Remove file</button>");
+                var _this = this;
+                removeButton.addEventListener("click", function(e) {
+                  // Make sure the button click doesn't submit the form:
+                 e.preventDefault();
+                 e.stopPropagation();
+                  // Remove the file preview. And delete it from TempImage.
+               _this.removeFile(file);
+                 console.log(_this);
+                 //TempImage.remove({"_id":Session.get('selectedImageId')});
 
-   //               });
-   //             // Add the button to the file preview element.
-   //             file.previewElement.appendChild(removeButton);
+                  });
+                // Add the button to the file preview element.
+                file.previewElement.appendChild(removeButton);
 
 
-   //     }
+        }
 
-   // });
+    });
 
 };
  Template.Submission.helpers({
@@ -292,6 +339,7 @@ Template.GalleryOpen.helpers({
 
 if (Meteor.isServer) {
   Meteor.startup(function ()
+
 {
     // code to run on server at startup
 
@@ -301,4 +349,5 @@ if (Meteor.isServer) {
 
 
   });
+
 }

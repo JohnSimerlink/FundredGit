@@ -1,9 +1,10 @@
-//fundred collection'in icinde: 1.isim 2.fundred ismi 3.location(array alcaksin) 4.imaj id 5.like 
+//fundred collection'in icinde: 1.isim 2.fundred ismi 3.location(array alcaksin) 4.imaj id 5.like
 //imaj collection'in icinde: imaj dosyasi
 // comment collection: 1.fundred id 2.mesaj
 
 Fundreds = new Mongo.Collection ("fundreds");
 Comments = new Mongo.Collection ("comments");
+Markers = new Mongo.Collection('markers');  
 
 Stores = {};
 

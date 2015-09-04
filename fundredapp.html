@@ -35,7 +35,7 @@
 	<div class ="row">
 		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
 		<div class ="col-lg-6 col-md-6 col-sm-10">
-			<img id="animation" src="animation.gif"/>
+			<img id="animation" src="http://media.giphy.com/media/109qivmw8Q6K52/giphy.gif" />
 		</div>
 		<div class ="col-lg-3 col-md-3 col-sm-1"> </div>
 	</div>
@@ -69,6 +69,19 @@
 </div>
 </template>
 
+<!-- ADDED GOOGLE MAP HTML-->
+<template name="google">
+<div class = "container-fluid">
+  <div class="map-container">
+    {{> googleMap name="google" options=mapOptions}}
+
+    <div class = "col-lg-12" id="map">
+    <div class ="row"></div></div></div>
+  </div>
+
+</template>
+<!-- END OF GOOGLE MAP HTML-->
+
 <template name="Map">
 	<div class = "container-fluid">
 		<div class ="row">
@@ -78,18 +91,14 @@
 	</div>
 </template>
 
-<template name="Color">
+
+
+<template name="Canvas">
 
 </template>
 
 
-<!-- ADDED GOOGLE MAP HTML-->
-<template name="google">
-  <div class="map-container">
-    {{> googleMap name="google" options=mapOptions}}
-  </div>
-</template>
-<!-- END OF GOOGLE MAP HTML-->
+
 
 
 <template name="Gallery">
@@ -111,7 +120,18 @@
 				<h1>{{fundredname}}</h1>
 				<p style="font-style:italic">by {{name}}</p>
 				<img style="width:80%" src="{{image.url}}"/>
+        <!--Facebook share code-->
+        <a href="http://www.facebook.com/sharer.php?u=http://<?php echo get_permalink(); ?>" target="_blank"><img src="http://www.simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" /></a>
+        <!--Facebook share code-->
 				<h3>Write a comment</h3>
+
+
+        <form action="/html/tags/html_form_tag_action.cfm" method="post">
+    <textarea name="comments" id="comments" style="width:150px;height:100px;font-family:cursive;border:solid 1px #6DB72C;" >Enter your comments here...
+    </textarea><br>
+    <input type="submit" value="Submit">
+    </form>
+
 			</div>
 		</div>
 
@@ -122,6 +142,7 @@
 
 
 <template name="GalleryItem">
+
 	<div class = "col-lg-4 col-md-4 col-sm-6 col-xs-12 gallerymodule" style="
 	overflow:hidden;" id="gallery">
 		<div class="dummy" style="margin-top:90%"> </div>
@@ -132,16 +153,6 @@
 				<p style="font-style:italic"> By {{name}}</p>
 				<small style="width:100%;display:block"> {{uploadedAt}}</small>
 				<div class="content-bottom">
-
-
-				<a id="likebutton" class="btn"> <span class="glyphicon glyphicon-heart">{{like}}</span> </a>
-
-<!-- Facebook share code-->
-              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count"></div>
-
-              <!--End of Facebook share code-->
-
-				<img style="width:20px" src="twitter.png">
 			</div>
 			</div>
 			</div>
@@ -172,15 +183,6 @@
 			</div>
 
 
-			<div class="form-group">
-				<label for="DateOfBirth">Are you over the age of 13?</label>
-        <form>
-<input type="radio" name="age" value="Yes" checked>Yes
-<br>
-<input type="radio" name="age" value="No">No
-</form>
-				<input class="form-control" id="FundredName" type="text" placeholder="mm/dd/yy">
-			</div>
 
       <div class="form-group">
         <label for="Zipcode">Your School</label>
@@ -229,26 +231,112 @@
 </template>
 
 
-<template name="notusedForNil">
-Bu asagidaki Dropzone icin.
+<template name="Dropzone">
+    Dropzone for images
 		<div class ="col-lg-4 col-md-4 col-sm-12">
 			<form action="/file-upload" class = "dropzone" id="mydropzone"> </form>
 
 		</div>
 
 </template>
-<template name="Drawing">
+<!--NEW DRAWING TEMPLATE-->
 
+<template name="paint">
+
+
+
+
+    <input type="range" id="large" value="1" max="25" min="1" step="1"><span id="valrange"></span>
+    <input type="color" value="#000000" id="color"><span id="valcolor"></span><br>
+
+    <button id="delete">Delete</button>
+    <button id="line">Line</button>
+    <button id="rect">Rectangle</button>
+    <button id="circle">Circle</button>
+    <button id="pen">Crayon</button>
+    <label>Forme rempli<input type="checkbox" id="rempli"></label><br>
+
+    <label>URL IMG
+        <input type="text" id="img">
+    </label>
+    <label>width image
+        <input type="number" id="width" value="50">
+    </label>
+    <label>height image
+        <input type="number" id="height" value="50">
+    </label>
+    <button id="image">Image</button><br>
+
+    <label>text
+        <input type="text" id="text" value="hello world !!!!">
+    </label>
+    <label>taille text
+        <input type="number" id="tailleText" value="30">
+    </label>
+    <label>police
+        <select name="police" id="police">
+            <option value="arial">Arial</option>
+            <option value="helvetica">Helvetica</option>
+            <option value="calibri">Calibri</option>
+            <option value="elephant">Elephant</option>
+            <option value="impact">Impact</option>
+        </select>
+    </label>
+    <button id="usetext">Text</button><br>
+
+    <fieldset>
+        <legend>Ombre</legend>
+        <label>Opacité
+            <input type="number" id="opacity" value="1">
+        </label><br>
+        <label>Ombre X
+            <input type="number" id="ombreX" value="1">
+        </label><br>
+        <label>Ombre Y
+            <input type="number" id="ombreY" value="1">
+        </label>
+    </fieldset>
+    <a href="" id="download">Telecharger mon dessin</a>
+
+    <div class="hidden"></div>
+    <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+
+</template>
+
+<!--END OF NEW DRAWING TEMPLATE-->
+
+
+
+<!--OLD DRAWING TEMPLATE-->
+<template name="Drawing">
+<!--Color Box-->
 	<div class = "container-fluid" style="height:90%;">
 		<div class ="row" style="height:80%; background:#EEE;">
 			<div class="col-lg-4 col-sm-12 col-md-3">
 				<div class="form-group" style="float:right;">
 					<label for="color">Select Color</label>
 					<input type='text' id="color" style="float:right; margin:1em;" />
+
+
+          <!--NEW ADDITIONS-->
+          <button id="circle">Circle</button>
+          <button id="rect">Rectangle</button>
+          <button id="pen">Crayon</button>
 				</div>
 			</div>
-			<div class ="col-lg-4 col-md-6 col-sm-12" >
-				<canvas  class='img- responsive' data-girar="0" width="300" height="280"></canvas>
+
+
+
+
+      <div class ="col-lg-4 col-md-6 col-sm-12" >
+
+<!--CANVAS-->
+<canvas  class='img- responsive' data-girar="0" width="1200" height="1070"></canvas>
+
+<!--CANVAS-->
+
 			</div>
 			<div class="col-lg-4 col-sm-12 col-md-3"></div>
 		</div>
@@ -264,7 +352,7 @@ Bu asagidaki Dropzone icin.
 	</div>
 
 </template>
-
+<!--END OF OLD DRAWING TEMPLATE-->
 
 <template name= "navigation">
 	<nav class="navbar navbar-default">
@@ -274,6 +362,7 @@ Bu asagidaki Dropzone icin.
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
+
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -286,10 +375,11 @@ Bu asagidaki Dropzone icin.
       <ul class="nav navbar-nav mainmenu">
         <li><a href="/"><span class="glyphicon glyphicon-home"> ABOUT</span></a></li>
         <li> <a href="/gallery"><span class="glyphicon glyphicon-th-large"> GALLERY</span></a> </li>
-        <li><a href="/map"> <span class="glyphicon glyphicon-globe"> MAP</span></a></li>
+
         <li><a href="/google"> <span class="glyphicon glyphicon-globe"> GOOGLE MAPS</span></a></li>
         <li><a href="/submit"> <span class="glyphicon glyphicon-plus"> SUBMIT</span></a></li>
-        <li><a href="/color"> <span class="glyphicon glyphicon-plus"> COLOR</span></a></li>
+        <li><a href="/dropzone"> <span class="glyphicon glyphicon-plus"> DROPZONE</span></a></li>
+        <li><a href="/paint"> <span class="glyphicon glyphicon-plus"> PAINT</span></a></li>
       </ul>
 
       <form class="navbar-form navbar-left" role="search">
