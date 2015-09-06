@@ -102,6 +102,12 @@
 
 
 <template name="Gallery">
+  <button onclick="myFunction()">Clear Space</button>
+  <script>
+function myFunction() {
+    location.reload();
+}
+</script>
 	<div class = "container-fluid">
 		<div class ="row">
 			{{#each fundreds}}
@@ -132,6 +138,16 @@
     <input type="submit" value="Submit">
     </form>
 
+
+    <button onclick="myFunction()">X</button>
+
+<script>
+function myFunction() {
+var elem = document.getElementById("{{image.url}}");
+elem.parentNode.removeChild(elem);
+}
+</script>
+
 			</div>
 		</div>
 
@@ -153,6 +169,16 @@
 				<p style="font-style:italic"> By {{name}}</p>
 				<small style="width:100%;display:block"> {{uploadedAt}}</small>
 				<div class="content-bottom">
+
+          <button onclick="Delete()">X</button>
+
+<script>
+function Delete() {
+  var elem = document.getElementById("gallery");
+elem.parentNode.removeChild(elem);
+}
+</script>
+
 			</div>
 			</div>
 			</div>
@@ -161,6 +187,7 @@
 
 
 <template name="Submission">
+
 	<div class = "container-fluid">
 		<div class ="row">
 			<div class ="col-lg-4 col-md-4 col-sm-12">
@@ -246,61 +273,36 @@
 
 
 
-    <input type="range" id="large" value="1" max="25" min="1" step="1"><span id="valrange"></span>
-    <input type="color" value="#000000" id="color"><span id="valcolor"></span><br>
+            <button id="drawing-mode" class="btn btn-info">Enter drawing mode</button>
+            <div style="display: none;" id="drawing-mode-options">
+              <label for="drawing-mode-selector">Mode:</label>
+              <select id="drawing-mode-selector">
+                <option>Pencil</option>
+                <option>Circle</option>
+                <option>Spray</option>
+                <option>Pattern</option>
 
-    <button id="delete">Delete</button>
-    <button id="line">Line</button>
-    <button id="rect">Rectangle</button>
-    <button id="circle">Circle</button>
-    <button id="pen">Crayon</button>
-    <label>Forme rempli<input type="checkbox" id="rempli"></label><br>
+                <option>hline</option>
+                <option>vline</option>
+                <option>square</option>
+                <option>diamond</option>
+                <option>texture</option>
+              </select><br>
+              <label for="drawing-line-width">Line width:</label>
+              <input type="range" value="10" min="0" max="150" id="drawing-line-width"><br>
+              <label for="drawing-color">Line color:</label>
+              <input type="color" value="#000000" id="drawing-color"><br>
+              <label for="drawing-shadow-width">Line shadow width:</label>
+              <input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
+            </div>
 
-    <label>URL IMG
-        <input type="text" id="img">
-    </label>
-    <label>width image
-        <input type="number" id="width" value="50">
-    </label>
-    <label>height image
-        <input type="number" id="height" value="50">
-    </label>
-    <button id="image">Image</button><br>
 
-    <label>text
-        <input type="text" id="text" value="hello world !!!!">
-    </label>
-    <label>taille text
-        <input type="number" id="tailleText" value="30">
-    </label>
-    <label>police
-        <select name="police" id="police">
-            <option value="arial">Arial</option>
-            <option value="helvetica">Helvetica</option>
-            <option value="calibri">Calibri</option>
-            <option value="elephant">Elephant</option>
-            <option value="impact">Impact</option>
-        </select>
-    </label>
-    <button id="usetext">Text</button><br>
+	<button class="btn btn-lg btn-primary" style="float:right; margin-top:10px;" id="submit-drawing"> Continue ></button>
+    <canvas style="center: 0px; " height="852" width="1000" id="c"></canvas>
 
-    <fieldset>
-        <legend>Ombre</legend>
-        <label>Opacité
-            <input type="number" id="opacity" value="1">
-        </label><br>
-        <label>Ombre X
-            <input type="number" id="ombreX" value="1">
-        </label><br>
-        <label>Ombre Y
-            <input type="number" id="ombreY" value="1">
-        </label>
-    </fieldset>
-    <a href="" id="download">Telecharger mon dessin</a>
 
-    <div class="hidden"></div>
-    <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+
+    <li style="margin-top:10px;"></li>
 
 
 </template>
@@ -333,7 +335,10 @@
       <div class ="col-lg-4 col-md-6 col-sm-12" >
 
 <!--CANVAS-->
-<canvas  class='img- responsive' data-girar="0" width="1200" height="1070"></canvas>
+
+<!--<canvas style="left: -30px; border: 2px solid; " height="1070" width="1200" id="c"></canvas>-->
+
+<!--<canvas  class='img- responsive' data-girar="0" width="1200" height="1070"></canvas>-->
 
 <!--CANVAS-->
 
@@ -364,7 +369,7 @@
         <span class="icon-bar"></span>
 
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <!--<span class="icon-bar"></span>-->
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
@@ -377,7 +382,7 @@
         <li> <a href="/gallery"><span class="glyphicon glyphicon-th-large"> GALLERY</span></a> </li>
 
         <li><a href="/google"> <span class="glyphicon glyphicon-globe"> GOOGLE MAPS</span></a></li>
-        <li><a href="/submit"> <span class="glyphicon glyphicon-plus"> SUBMIT</span></a></li>
+        <!--<li><a href="/submit"> <span class="glyphicon glyphicon-plus"> SUBMIT</span></a></li>-->
         <li><a href="/dropzone"> <span class="glyphicon glyphicon-plus"> DROPZONE</span></a></li>
         <li><a href="/paint"> <span class="glyphicon glyphicon-plus"> PAINT</span></a></li>
       </ul>
@@ -414,6 +419,7 @@
       data-show-faces="true">
   </div>
   <!--END OF FACEBOOK LIKE BUTTON-->
+
 
 </nav>
 </template>
